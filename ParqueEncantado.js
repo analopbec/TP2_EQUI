@@ -57,6 +57,9 @@ module.exports = new ParqueEncantado();
 
 colonia tiene criaturas
 
+
+
+cargar 
 areas de colonias:
 - losClaros --> zonas abiertas y acogedoras
     - 100 + la suma del poder ofensivo de cada criatura de la colonia 

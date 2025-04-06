@@ -161,3 +161,5 @@ class Hada {
 }
 
 module.exports = {Mascota, guardian, hechicero, Domador, Duende, Hada};
+
+// ver

@@ -120,7 +120,7 @@ console.log(d2.name," - Es extraordinaria?: ", d2.esExtraordinaria());
 console.log(d2.name," - Cuanto vuela?: ", d2.getVuelo(), "km.");
 
 console.log("")
-console.log("")
+console.log("Siguiente")
 
 /*
 
