@@ -95,8 +95,8 @@ console.log(h2.name," - Cuanto vuela?: ", h2.getVuelo(), "km.");
 
 console.log("")
 console.log("")
-
-console.log("🟢 Consultas Básicas de Criaturas");
+console.log("----------------------------");
+console.log("")
 console.log(d2.name," - Rol: ", d2.rol.name);
 console.log(d2.name," - Poder mágico: ", d2.getPoderMagico());
 console.log(d2.name," - Poder ofensivo: ", d2.getPoderOfensivo());
@@ -118,8 +118,6 @@ console.log(d2.name," - Es formidable?: ", d2.esFormidable());
 console.log(d2.name," - Es extraordinaria?: ", d2.esExtraordinaria());
 console.log(d2.name," - Cuanto vuela?: ", d2.getVuelo(), "km.");
 
-console.log("")
-console.log("----------------------------")
 
 const claro1 = new Claro("Claro 1");
 const claro2 = new Claro("Claro 2");
@@ -136,7 +134,9 @@ const c2 = new Colonia("Colonia de Duendes");
 c2.agregarCriaturas([d1,d2,d3])
 //ParqueEncantado.agregarColonia(c1);
 //ParqueEncantado.agregarColonia(c2);
-
+console.log("")
+console.log("----------------------------");
+console.log("")
 console.log("🟢 Consulta de colonias");
 console.log(c1.name, "- Criaturas: ", c1.mostrarCriaturas())
 console.log(c1.name, "- Poder Ofensivo: ", c1.getPoderOfensivo())
@@ -157,8 +157,8 @@ console.log(c1.name, "- Poder Defensivo: ", c1.getPoderDefensivo())
 console.log(c2.name, " intenta conquitar clero")
 c2.conquistarArea(claro2)
 console.log("")
-console.log("----------------------------")
-
+console.log("----------------------------");
+console.log("")
 const c3 = new Colonia("Colonia de Malvados");
 c3.agregarCriaturas([d4,h4, d5])
 console.log(c3.name, "- Poder Ofensivo: ", c3.getPoderOfensivo())
@@ -170,8 +170,81 @@ c3.conquistarArea(claro1)
 console.log(`Colonia actual que habita ${claro1.name} : ${claro1.coloniaActual.name}`)
 console.log(`Poder defensivo de ${claro1.name}: ${claro1.poderDefensivo()}`)
 console.log("")
-console.log("----------------------------")
+console.log("----------------------------");
+console.log("")
 console.log("🟢 Consulta del parque encantado");
 console.log("Colonias del parque encantado: ", parqueEncantado.mostrarColonias())
 console.log("Areas del parque encantado: ", parqueEncantado.mostrarAreas())
 console.log("Criaturas del parque encantado: ", parqueEncantado.mostrarCriaturas())
+
+console.log("")
+console.log("----------------------------");
+console.log("")
+// Crear nuevas criaturas
+const h5 = new Hada("Hada Celeste", 80, 90, guardian);
+const d6 = new Duende("Duende Oscuro", 100, 50, new Domador([new Mascota(10, true), new Mascota(5, false)]));
+const h6 = new Hada("Hada Brillante", 120, 110, hechicero);
+const d7 = new Duende("Duende del Sur", 70, 60, new Domador([new Mascota(8, true), new Mascota(6, false)]));
+
+// Crear nuevas colonias
+const c4 = new Colonia("Colonia de Luz");
+c4.agregarCriaturas([h5, h6]);
+
+const c5 = new Colonia("Colonia de Sombras");
+c5.agregarCriaturas([d6, d7]);
+
+// Crear nuevas áreas
+const claro4 = new Claro("Claro 4");
+const castillo4 = new Castillo("Castillo 4");
+
+// Mostrar información inicial de las colonias y áreas
+console.log("🟢 Colonias y áreas");
+console.log(c4.name, "- Criaturas: ", c4.mostrarCriaturas());
+console.log(c4.name, "- Poder Ofensivo: ", c4.getPoderOfensivo());
+console.log(c4.name, "- Poder Defensivo: ", c4.getPoderDefensivo());
+console.log(c5.name, "- Criaturas: ", c5.mostrarCriaturas());
+console.log(c5.name, "- Poder Ofensivo: ", c5.getPoderOfensivo());
+console.log(c5.name, "- Poder Defensivo: ", c5.getPoderDefensivo());
+console.log("Áreas del parque encantado: ", parqueEncantado.mostrarAreas());
+
+
+// Colonia de Luz intenta conquistar Claro 4
+console.log(c4.name, " intenta conquistar ", claro4.name);
+c4.conquistarArea(claro4);
+console.log(`Colonia actual que habita ${claro4.name}: ${claro4.coloniaActual.name}`);
+console.log(`Poder defensivo de ${claro4.name}: ${claro4.poderDefensivo()}`);
+console.log("")
+console.log("----------------------------");
+console.log("")
+
+// Colonia de Sombras intenta conquistar Claro 4
+console.log(c5.name, " intenta conquistar ", claro4.name);
+c5.conquistarArea(claro4);
+console.log(`Colonia actual que habita ${claro4.name}: ${claro4.coloniaActual.name}`);
+console.log(`Poder defensivo de ${claro4.name}: ${claro4.poderDefensivo()}`);
+console.log("")
+console.log("----------------------------");
+console.log("")
+
+// Colonia de Luz intenta conquistar Castillo 4
+console.log(c4.name, " intenta conquistar ", castillo4.name);
+c4.conquistarArea(castillo4);
+console.log(`Colonia actual que habita ${castillo4.name}: ${castillo4.coloniaActual ? castillo4.coloniaActual.name : "Ninguna"}`);
+console.log(`Poder defensivo de ${castillo4.name}: ${castillo4.poderDefensivo()}`);
+console.log("")
+console.log("----------------------------");
+console.log("")
+// Colonia de Sombras intenta conquistar Castillo 4
+console.log(c5.name, " intenta conquistar ", castillo4.name);
+c5.conquistarArea(castillo4);
+console.log(`Colonia actual que habita ${castillo4.name}: ${castillo4.coloniaActual ? castillo4.coloniaActual.name : "Ninguna"}`);
+console.log(`Poder defensivo de ${castillo4.name}: ${castillo4.poderDefensivo()}`);
+console.log("")
+console.log("----------------------------");
+console.log("")
+
+// Mostrar estado final del parque encantado
+console.log("🟢 Estado final del parque encantado");
+console.log("Colonias del parque encantado: ", parqueEncantado.mostrarColonias());
+console.log("Áreas del parque encantado: ", parqueEncantado.mostrarAreas());
+console.log("Criaturas del parque encantado: ", parqueEncantado.mostrarCriaturas());
