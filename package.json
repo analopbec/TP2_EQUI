@@ -1,0 +1,21 @@
+{
+  "name": "equi",
+  "version": "1.0.0",
+  "description": "Los duendes y las hadas son criaturas mágicas que viven ocultos en un lugar muy secreto llamado **Parque Encantado**.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/analopbec/TP2_EQUI.git"
+  },
+  "author": "",
+  "license": "ISC"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}

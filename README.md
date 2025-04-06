@@ -1,6 +1,6 @@
 # Bosque Encantado
 
-Los duendes y las hadas son criaturas mágicas que viven ocultos en un lugar muy secreto llamado **Parque Encantado**. 
+Los duendes y las hadas son criaturas mágicas que viven ocultos en un lugar muy secreto llamado **Parque Encantado**.  
 
 Se nos solicita modelar un sistema de objetos que pueda incluir tanto a las criaturas conocidas como a cualquier otra que habite en el parque.
 
