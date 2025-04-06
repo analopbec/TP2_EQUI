@@ -1,79 +1,128 @@
-/*
+
+const parqueEncantado = {
+    name: "Parque Encantado",
+    colonias: [],
+    areas: [],
+    agregarColonia(colonia){
+        this.colonias.push(colonia);
+    },
+    agregarArea(area){
+        this.areas.push(area);
+    },
+    mostrarColonias(){
+        return this.colonias.map((colonia) => colonia.name);
+    },
+    mostrarCriaturas(){
+        return this.colonias.map(criatura => criatura.criaturas.map(criatura => criatura.name));
+    },
+    mostrarAreas(){
+        return this.areas.map((area) => area.name);
+    }
+
+  }
+
 class Colonia{
     constructor(name){
-        this.name = name
-        this.criaturas = []
-        this.area = NaN
+        this.name = name;
+        this.criaturas = [];
+        this.area = null;
+        parqueEncantado.agregarColonia(this); 
     }
     agregarCriaturas(listaCriaturas){
         this.criaturas.push(...listaCriaturas)
     }
     conquistarArea(unArea){
-        unArea.conquistarArea(this)
+        const conquistaExitosa = unArea.conquistarArea(this);
+
+        if (conquistaExitosa) {
+            this.area = unArea;
+            console.log(`¡Conquista exitosa! ${this.name} ha conquistado el ${this.area.name}.`);
+        } else {
+            console.log(`La conquista del ${unArea.name} por ${this.name} ha fallado.`);
+        }
     }
     getPoderOfensivo(){
-        this.criaturas.reduce( (a,criatura) => a + criatura.getPoderOfensivo(),0 )
+        return this.criaturas.reduce( (a,criatura) => a + criatura.getPoderOfensivo(),0 )
     }
     getArea(){
-
+        return this.area ? this.area.name : "La colonia no ocupa ningún área.";
+    }
+    mostrarCriaturas(){
+        return this.criaturas.map((criatura) => criatura.name);
+    }
+    getPoderDefensivo(){       
+        return this.area ? this.area.poderDefensivo() : 0;
     }
 
 }
 
-
-const clero = {
-    coloniaActual: NaN,
+class Claro {
+    constructor(name){
+    this.name = name;
+    this.tipoArea ='Los Claros';
+    this.coloniaActual = null;
+    parqueEncantado.agregarArea(this); 
+    }
     poderDefensivo(){
-        return this.coloniaActual == NaN ? 100 : this.coloniaActual.getPoderOfensivo() + 100
-    },
-    conquistarArea(coloniaAtacante){
-        this.coloniaActual == NaN ? this.coloniaActual = coloniaAtacante :
-        this.poderDefensivo() < coloniaAtacante.getPoderOfensivo() ? 
-            this.coloniaActual = coloniaAtacante
-            
-
+        return this.coloniaActual == null ? 100 : this.coloniaActual.getPoderOfensivo() + 100
+    }
+    conquistarArea(coloniaAtacante) {
+        const poderOfenstoAtacante = coloniaAtacante.getPoderOfensivo();
+        if (this.coloniaActual === null) {
+            this.coloniaActual = coloniaAtacante;
+            return true; // Conquista exitosa
+        } else if (this.poderDefensivo() < poderOfenstoAtacante) {    
+            this.coloniaActual = coloniaAtacante;
+            return true; // Conquista exitosa
+        } else {
+            this.coloniaActual.criaturas.forEach((criatura) => {criatura.poderMagico *= 0.85});
+            return false; // Conquista fallida
+        }
+    }
+    getColonia() {
+        return this.coloniaActual ? this.coloniaActual.name : "El área no está ocupada por ninguna colonia.";
+    }
+    getCriaturas() {
+        return this.coloniaActual ? this.coloniaActual.criaturas : [];
     }
 }
-*/
 
-class ParqueEncantado {
-    constructor() {
-      this.colonias = [];
+class Castillo {  
+    constructor(name){
+        this.name = name;
+        this.tipoArea ='Los Castillos';
+        this.coloniaActual = null;
+        parqueEncantado.agregarArea(this); 
     }
-    agregarColonia(colonia) {
-      this.criaturas.push(criatura);
+    poderDefensivo(){
+        return this.coloniaActual == null ? 0 : this.coloniaActual.criaturas.reduce((a,criatura) => a + (criatura.getPoderOfensivo() * 200),0)
     }
-    mostrarCriaturas() {
-        this.criaturas.forEach((criatura) => console.log(criatura));  // ✅ Así muestra las criaturas correctamente
+    conquistarArea(coloniaAtacante) {
+        const poderOfensivoActual = this.coloniaActual
+        const poderOfenstoAtacante = coloniaAtacante.getPoderOfensivo();
+        if (this.coloniaActual === null) {
+            this.coloniaActual = coloniaAtacante;
+            return true; // Conquista exitosa
+        } else if (poderOfensivoActual < poderOfenstoAtacante) {    
+            this.coloniaActual = coloniaAtacante;
+            return true; // Conquista exitosa
+        } else {
+            coloniaAtacante.criaturas.forEach((criatura) => {criatura.poderMagico *= 0.85});
+            return false; // Conquista fallida
+        }
     }
-    eliminarCriaturas() {
-      this.criaturas = [];
+    getColonia() {
+        return this.coloniaActual ? this.coloniaActual.name : "El área no está ocupada por ninguna colonia.";
     }
-  }
-
-module.exports = new ParqueEncantado();
-
-/*
-
-colonia tiene criaturas
+    getCriaturas() {
+        return this.coloniaActual ? this.coloniaActual.criaturas : [];
+    }
+}
 
 
-
-cargar 
-areas de colonias:
-- losClaros --> zonas abiertas y acogedoras
-    - 100 + la suma del poder ofensivo de cada criatura de la colonia 
-- losCastillos
-    - poderDefensivo = 200 * cada criatura formidable
-
-colonia conquista área 
-luchar()
-  - gana quien tenga mayor poder poderDefensivo
-  - si es la invasora se queda con el area
-  - si gana la q vive AuthenticatorAssertionResponse, mantiene su control pero cada criatura pierde el 15% de su poderMagico
+module.exports = {Colonia, Claro, Castillo, parqueEncantado};
 
 
-*/
 
 
 

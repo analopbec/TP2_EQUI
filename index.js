@@ -1,5 +1,6 @@
 console.log("Prueba ok")
-const parque = require("./ParqueEncantado");
+
+const {Colonia, Claro, Castillo, parqueEncantado} = require("./ParqueEncantado");
 const {Mascota, guardian, hechicero, Domador, Duende, Hada} = require("./criaturas"); 
 
 
@@ -18,12 +19,10 @@ const m4 = new Mascota(14, false);
 const h3 = new Hada("Hada Dorada", 70, 50, new Domador([m4]) );
 const d3 = new Duende("Duende Mágico", 20, 40, new Domador([new Mascota(1,true), new Mascota(12,true)]));
 
-parque.agregarCriatura(h1);
-parque.agregarCriatura(h2);
-parque.agregarCriatura(h3);
-parque.agregarCriatura(d1);
-parque.agregarCriatura(d2);
-parque.agregarCriatura(d3);
+
+const h4 = new Hada("Hada mala", 160, 270, guardian);
+const d4 = new Duende("Duende tremendo", 120, 240, new Domador([new Mascota(16,true), new Mascota(12,true)]));
+const d5 = new Duende("Duende loco", 620, 200, new Domador([new Mascota(2,true), new Mascota(1,true)]))
 
 
 console.log("🟢 Consultas Básicas de Criaturas");
@@ -120,68 +119,59 @@ console.log(d2.name," - Es extraordinaria?: ", d2.esExtraordinaria());
 console.log(d2.name," - Cuanto vuela?: ", d2.getVuelo(), "km.");
 
 console.log("")
-console.log("Siguiente")
+console.log("----------------------------")
 
-/*
+const claro1 = new Claro("Claro 1");
+const claro2 = new Claro("Claro 2");
+const claro3 = new Claro("Claro 3");
+const castillo1 = new Castillo("Castillo 1");
+const castillo2 = new Castillo("Castillo 2");
+const castillo3 = new Castillo("Castillo 3");
 
-
-
-
-console.log(d1.name, "Poder Mágico: ", d1.getPoderMagico());
-console.log(h1.name, "Vuela: ", h1.getVuelo(), "km.");
-console.log(d1.name, "Vuela: ", d1.getVuelo()); // Debería dar error
-console.log(h2.name, "es formidable?", h2.esFormidable());
-console.log(d2.name, "es formidable?", d2.esFormidable());
-h1.aumentarVuelo(2)
-console.log(h1.name, "Ahora vuela: ", h1.getVuelo(), "km.");
-
-console.log('')
-console.log("\n🟢 Consultas sobre Roles");
-console.log(h1.name, "tiene el rol:", h1.rol.constructor.name);
-console.log(d1.name, "tiene el rol:", d1.rol.constructor.name);
-console.log(h2.name, "tiene el rol:", h2.rol.constructor.name);
-
-console.log('')
-console.log("\n🟢 Poder ofensivo de Criaturas");
-console.log(h1.name, "tiene poder ofensivo de:", h1.poderOfensivo());
-console.log(d1.name, "tiene poder ofensivo de:", d1.poderOfensivo());
-console.log(h2.name, "tiene poder ofensivo de:", h2.poderOfensivo());
+const c1 = new Colonia("Colonia de Hadas");
+c1.agregarCriaturas([h1,h2,h3])
 
 
-console.log('')
-console.log("\n🟢 Cambio de Rol");
-console.log(h1.name, "tenía el rol:", h1.rol.constructor.name);
-h1.cambiarRol();
-console.log(h1.name, "ahora tiene el rol:", h1.rol.constructor.name);
+const c2 = new Colonia("Colonia de Duendes");
+c2.agregarCriaturas([d1,d2,d3])
+//ParqueEncantado.agregarColonia(c1);
+//ParqueEncantado.agregarColonia(c2);
 
+console.log("🟢 Consulta de colonias");
+console.log(c1.name, "- Criaturas: ", c1.mostrarCriaturas())
+console.log(c1.name, "- Poder Ofensivo: ", c1.getPoderOfensivo())
+console.log(c1.name, "- Poder Defensivo: ", c1.getPoderDefensivo())
 
+console.log(c1.name, " intenta conquitar clero")
+c1.conquistarArea(claro1)
+console.log(c1.name, "- Poder Ofensivo: ", c1.getPoderOfensivo())
+console.log(c1.name, "- Poder Defensivo: ", c1.getPoderDefensivo())
+console.log("Colonia actual que habita los claros :", claro1.coloniaActual.name)
+console.log("Poder defensivo de los claros: ", claro1.poderDefensivo())
+console.log("Poder defensivo de los castillos: ", castillo1.poderDefensivo())
+console.log(c2.name, " intenta conquitar clero")
+c2.conquistarArea(claro1)
+console.log("Colonia actual que habita los claros :", claro1.coloniaActual.name)
+console.log(c1.name, "- Poder Ofensivo: ", c1.getPoderOfensivo())
+console.log(c1.name, "- Poder Defensivo: ", c1.getPoderDefensivo())
+console.log(c2.name, " intenta conquitar clero")
+c2.conquistarArea(claro2)
+console.log("")
+console.log("----------------------------")
 
-console.log('')
-console.log("\n🟢 Consultas sobre Mascotas");
-console.log("Mascota 1 tiene cuernos?", m1.tieneCuernos());
-console.log("Mascota 2 tiene cuernos?", m2.tieneCuernos());
-console.log("Mascota 3 tiene cuernos?", m3.tieneCuernos());
-console.log("Mascota 3 es veterana?", m3.esVeterana());
-
-console.log('')
-console.log("\n🟢 Entrenamiento de Mascotas");
-console.log(d1.name, "intenta entrenar una mascota:", d1.entrenarMascota(new Mascota(6, true)));
-console.log(h2.name, "intenta entrenar una mascota:", h2.entrenarMascota(new Mascota(3, false))); // No debería poder
-
-
-console.log('')
-console.log("\n🟢 Evaluación de Criaturas Extraordinarias");
-console.log(h1.name, "es extraordinaria?", h1.esExtraordinaria());
-console.log(d1.name, "es extraordinario?", d1.esExtraordinaria());
-
-console.log('')
-console.log("\n🟢 Evaluación de Criaturas Formidables");
-console.log(h1.name, "es formidable?", h1.esFormidable());
-console.log(d1.name, "es formidable?", d1.esFormidable());
-
-console.log('')
-console.log("\n🟢 Criaturas dentro del Parque Encantado");
-console.log(parque);
-parque.mostrarCriaturas(); // Si corriges el método `mostrarCriaturas`
-
-*/
+const c3 = new Colonia("Colonia de Malvados");
+c3.agregarCriaturas([d4,h4, d5])
+console.log(c3.name, "- Poder Ofensivo: ", c3.getPoderOfensivo())
+console.log(c3.name, "- Poder Defensivo: ", c3.getPoderDefensivo())
+console.log("Colonia actual que habita los claros :", claro1.coloniaActual.name)
+console.log("Poder defensivo de los claros: ", claro1.poderDefensivo())
+console.log(c3.name, " intenta conquitar clero")
+c3.conquistarArea(claro1)
+console.log(`Colonia actual que habita ${claro1.name} : ${claro1.coloniaActual.name}`)
+console.log(`Poder defensivo de ${claro1.name}: ${claro1.poderDefensivo()}`)
+console.log("")
+console.log("----------------------------")
+console.log("🟢 Consulta del parque encantado");
+console.log("Colonias del parque encantado: ", parqueEncantado.mostrarColonias())
+console.log("Areas del parque encantado: ", parqueEncantado.mostrarAreas())
+console.log("Criaturas del parque encantado: ", parqueEncantado.mostrarCriaturas())

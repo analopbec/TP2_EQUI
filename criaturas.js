@@ -17,21 +17,6 @@ class Mascota{
 }
 
 
-const guardian = {
-    name: "Guardian",
-    extra(){return 100},
-    extraordinario(criatura) {
-        return criatura.getPoderMagico() > 50;
-    },
-    siguienteRol() {
-        return new Domador([new Mascota(1, false)]);
-    },
-    agregarMascota(mascota){
-        return `❌ Los Guardianes no entrenan mascotas. Para entrenar a ${mascota} cambia de Rol.`
-    }
-}
-
-
 class Domador{
     constructor(mascotas = [], name = "Domador") { 
         this.mascotas = mascotas;
@@ -58,6 +43,19 @@ class Domador{
         
     }
 
+}
+const guardian = {
+    name: "Guardian",
+    extra(){return 100},
+    extraordinario(criatura) {
+        return criatura.getPoderMagico() > 50;
+    },
+    siguienteRol() {
+        return new Domador([new Mascota(1, false)]);
+    },
+    agregarMascota(mascota){
+        return `❌ Los Guardianes no entrenan mascotas. Para entrenar a ${mascota} cambia de Rol.`
+    }
 }
 
 const hechicero = {
